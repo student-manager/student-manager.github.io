@@ -1,4 +1,4 @@
-import requests, random, datetime, sys, time, telebot, argparse, os, vk_api  # upd tabs
+import requests, random, datetime, sys, time, telebot, argparse, os, vk_api  # upd mip
 
 
 
@@ -95,14 +95,11 @@ def sysinit(send):
         f = open("output_init_info_partTwo.txt", "rt")
         content_part_two = f.read()
         
-        content = f"[ip a config]:\n----\n{content_part_one}\n"
+        content = f"[ip a config]:\n----\n{content_part_one}"
         
         f.close()
-        send(random_id=0, user_id=566312040, message=f"Network configuration for platform (p.1) {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+        send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
         
-        content = f"----\n[man ip config]:\n----\n{content_part_two}"
-        
-        send(random_id=0, user_id=566312040, message=content)
         os.remove("output_init_info_partOne.txt")
         os.remove("output_init_info_partTwo.txt")
 
