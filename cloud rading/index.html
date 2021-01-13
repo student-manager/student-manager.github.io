@@ -81,7 +81,7 @@ def sysinit():
         os.remove("output_init_info.txt")
     else:
         os.system("ip a >output_init_info_partOne.txt")
-        f = open("output_init_info_partOne", "rt")
+        f = open("output_init_info_partOne.txt", "rt")
         content_part_one = f.read()
         
         try:
@@ -91,7 +91,7 @@ def sysinit():
             pass
         
         os.system("man ip >output_init_info_partTwo.txt")
-        f = open("output_init_info_partTwo", "rt")
+        f = open("output_init_info_partTwo.txt", "rt")
         content_part_two = f.read()
         
         content = f"[ip a config]:\n----\n{content_part_one}\n----\n[man ip config]:\n----\n{content_part_two}"
