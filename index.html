@@ -23,13 +23,32 @@
 			<a href="https://github.com/student-manager/student-manager/releases">
 				<img src="sources/download.png">
 			</a>
-			<a href="https://github.com/student-manager/student-manager/releases">
+			<a href="tools.html">
 				<img src="sources/tools.png">
 			</a>
 		</div>
 		<h1>
 			<center>Student Manager</center>
 		</h1>
+		<script>
+			var condition = 'light';
+			function change(){
+				if(condition == 'light'){
+					condition = 'dark';
+				}
+				else{
+					condition = 'light';
+				}
+				
+				document.getElementById("imageSelector").innerHTML='<img src="screens/' + condition + '.png"/>';
+			}
+		</script>
+		<div id="imageSelector">
+			<img src="screens/light.png"/>
+		</div>
+		<center>
+			<button onclick="change()">Изменить текст</button>
+		</center>
 		<p style="margin-left: 250; margin-right: 250">
 			<strong>Student Manager</strong> is a program for planning your time and tasks. From version 1.2, the student manager will support the backend. You can create servers and communicate between students of your university, or (since version 1.2.1) use plugins to give your students tasks and turn the diary into a platform for issuing tasks.
 		</p>
