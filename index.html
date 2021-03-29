@@ -3,6 +3,7 @@
 		<title>
 			Student Manager page
 		</title>
+		<link rel="shortcut icon" href="sources/icon.ico" type="image/x-icon">
 		<style>
 			body {
 				margin-top: 60;
@@ -41,13 +42,17 @@
 				}
 				
 				document.getElementById("imageSelector").innerHTML='<img src="screens/' + condition + '.png"/>';
+				if(condition == 'light') document.getElementById("smartButton").innerHTML='<img src="sources/button_ADT.png"/>';
+				else document.getElementById("smartButton").innerHTML='<img src="sources/button_uADT.png"/>';
 			}
 		</script>
-		<div id="imageSelector">
-			<img src="screens/light.png"/>
-		</div>
 		<center>
-			<button onclick="change()">Изменить текст</button>
+			<div id="imageSelector">
+				<img src="screens/light.png"/>
+			</div>
+			<button onclick="change()" id="smartButton">
+				<img src="sources/button_ADT.png"/>
+			</button>
 		</center>
 		<p style="margin-left: 250; margin-right: 250">
 			<strong>Student Manager</strong> is a program for planning your time and tasks. From version 1.2, the student manager will support the backend. You can create servers and communicate between students of your university, or (since version 1.2.1) use plugins to give your students tasks and turn the diary into a platform for issuing tasks.
